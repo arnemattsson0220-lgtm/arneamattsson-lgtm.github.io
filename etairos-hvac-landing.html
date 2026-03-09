@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etairos HVAC® | Commercial & Industrial HVAC | Memphis, TN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #0b1628;
+    --navy2:   #132039;
+    --navy3:   #1c2f52;
+    --amber:   #e8981a;
+    --amber2:  #f5b53f;
+    --steel:   #8fa4c0;
+    --white:   #f5f7fa;
+    --offwhite:#dde4ef;
+    --text:    #c8d4e6;
+    --muted:   #6b84a3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(11,22,40,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,152,26,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .nav-logo span { color: var(--amber); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steel);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--amber); }
+
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: var(--navy);
+    padding: 10px 24px;
+    text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--amber2); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,152,26,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,152,26,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(232,152,26,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    bottom: -300px; left: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(19,32,57,0.8) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 2px;
+    background: var(--amber);
+  }
+
+  .hero-h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(56px, 8vw, 108px);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    max-width: 820px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero-h1 .outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .hero-h1 .amber { color: var(--amber); }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text);
+    max-width: 540px;
+    line-height: 1.6;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: var(--navy);
+    padding: 16px 36px;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--amber2); transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(143,164,192,0.4);
+    color: var(--steel);
+    padding: 16px 36px;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    position: relative;
+    background: var(--navy2);
+    border-top: 1px solid rgba(232,152,26,0.3);
+    border-bottom: 1px solid rgba(232,152,26,0.1);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 40px;
+    border-right: 1px solid rgba(143,164,192,0.15);
+  }
+
+  .trust-item:last-child { border-right: none; }
+
+  .trust-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+  }
+
+  .trust-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--steel);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section {
+    position: relative;
+    padding: 100px 48px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--amber);
+  }
+
+  .section-h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  .section-lead {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+  }
+
+  /* ─── ABOUT / STORY ─── */
+  .about-section {
+    background: var(--navy2);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-right {
+    position: relative;
+  }
+
+  .about-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .stat-block {
+    background: var(--navy3);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--amber);
+  }
+
+  .stat-block .num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+  }
+
+  .stat-block .lbl {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--steel);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .origin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(232,152,26,0.1);
+    border: 1px solid rgba(232,152,26,0.3);
+    padding: 10px 18px;
+    margin-bottom: 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  /* ─── SERVICES ─── */
+  .services-section { background: var(--navy); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--navy2);
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--navy3); }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 24px;
+    color: var(--amber);
+  }
+
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+
+  .service-card p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .service-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border-bottom: 1px solid var(--amber);
+    padding-bottom: 2px;
+  }
+
+  /* ─── BRANDS ─── */
+  .brands-section {
+    background: var(--navy2);
+    padding: 60px 48px;
+    text-align: center;
+  }
+
+  .brands-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .brands-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .brand-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(143,164,192,0.2);
+    color: var(--steel);
+    padding: 8px 20px;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .brand-pill:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* ─── REVIEWS ─── */
+  .reviews-section { background: var(--navy); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    background: var(--navy2);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px; right: 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(232,152,26,0.07);
+    line-height: 1;
+  }
+
+  .stars {
+    color: var(--amber);
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+
+  .review-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .reviewer-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .reviewer-role {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── CONTACT FORM ─── */
+  .contact-section {
+    background: var(--navy2);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    color: var(--amber);
+    margin-top: 36px;
+  }
+
+  .contact-info h3:first-child { margin-top: 0; }
+
+  .contact-info p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--navy3);
+    border: 1px solid rgba(143,164,192,0.2);
+    color: var(--white);
+    padding: 14px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--amber);
+  }
+
+  .form-group select option { background: var(--navy3); }
+
+  .form-group textarea { height: 110px; resize: vertical; }
+
+  .form-submit {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: var(--navy);
+    border: none;
+    padding: 18px 40px;
+    cursor: pointer;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    width: 100%;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--amber2); }
+
+  /* ─── WHY US ─── */
+  .whyus-section { background: var(--navy); }
+
+  .whyus-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .why-item {
+    display: flex;
+    gap: 24px;
+    background: var(--navy2);
+    padding: 36px 32px;
+    align-items: flex-start;
+  }
+
+  .why-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: rgba(232,152,26,0.15);
+    line-height: 1;
+    min-width: 52px;
+    transition: color 0.3s;
+  }
+
+  .why-item:hover .why-num { color: rgba(232,152,26,0.35); }
+
+  .why-content h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .why-content p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ─── LOCATIONS ─── */
+  .locations-section {
+    background: var(--navy3);
+    padding: 80px 48px;
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1100px;
+    margin: 40px auto 0;
+  }
+
+  .location-card {
+    background: var(--navy2);
+    padding: 36px 32px;
+    border-top: 3px solid var(--amber);
+  }
+
+  .location-card h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+
+  .location-card p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .location-card .phone {
+    display: block;
+    margin-top: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .location-card .phone:hover { color: var(--amber); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #070f1c;
+    padding: 60px 48px 36px;
+    border-top: 1px solid rgba(232,152,26,0.2);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(143,164,192,0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-brand .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand .logo span { color: var(--amber); }
+
+  .footer-brand p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 320px;
+  }
+
+  footer h5 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+  }
+
+  footer ul { list-style: none; }
+
+  footer ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    cursor: default;
+    transition: color 0.2s;
+  }
+
+  footer ul li:hover { color: var(--white); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 28px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .social-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid rgba(143,164,192,0.2);
+    padding: 6px 14px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .social-links a:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+
+    section { padding: 72px 24px; }
+
+    .hero { padding: 100px 24px 72px; }
+
+    .about-grid,
+    .contact-grid,
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+
+    .services-grid,
+    .reviews-grid,
+    .whyus-grid,
+    .locations-grid { grid-template-columns: 1fr; }
+
+    .form-row { grid-template-columns: 1fr; }
+
+    .trust-item { padding: 12px 20px; }
+
+    .trust-bar { padding: 16px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Etairos<span>®</span> HVAC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-eyebrow">Memphis, TN &amp; Madison, MS</div>
+
+  <h1 class="hero-h1">
+    <span class="outline">Engineering</span><br>
+    <span class="amber">Sustainable</span><br>
+    Outcomes
+  </h1>
+
+  <p class="hero-sub">
+    The Mid-South's largest commercial HVAC manufacturers' representative. Sales, service, and integration of equipment for commercial, institutional and industrial buildings.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request a Quote</a>
+    <a href="#services" class="btn-secondary">Our Services</a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-num">150+</div>
+    <div class="trust-label">Years Combined<br>Industry Experience</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">30+</div>
+    <div class="trust-label">Premier<br>Manufacturers</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">17</div>
+    <div class="trust-label">Degreed<br>Engineers</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">3</div>
+    <div class="trust-label">Locations<br>Across Mid-South</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">10</div>
+    <div class="trust-label">Past ASHRAE<br>Chapter Presidents</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="origin-badge">Founded 2020 · Memphis, TN</div>
+      <div class="section-eyebrow">Who We Are</div>
+      <h2 class="section-h2">Built From<br>150 Years<br>of Legacy</h2>
+      <p class="section-lead">
+        Etairos was formed through the merger of Gorham/Schaffler and Mills Wilson George — the two oldest rep firms in Memphis — then joined by Delta Thermal Solutions, the longest-standing HVAC rep in the Jackson, MS market.
+      </p>
+      <p style="font-size:15px;font-weight:300;color:var(--text);line-height:1.8;max-width:520px;">
+        <em style="color:var(--amber)">Etairos</em> is Biblical Greek for "trusted partner." Our logo, the fire-breathing polar bear, represents endurance, tenacity, and protection. That same character defines how we approach every project: we own the outcome from budgeting and design selection through installation, start-up, and ongoing maintenance.
+      </p>
+    </div>
+    <div class="about-right">
+      <div style="background:var(--navy3);padding:36px;border-left:4px solid var(--amber);margin-bottom:2px;">
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:600;line-height:1.5;color:var(--white);">
+          "We customize high-performance, economical, sustainable mechanical systems for designers, builders and owners."
+        </p>
+        <p style="font-size:13px;color:var(--muted);margin-top:16px;letter-spacing:0.08em;text-transform:uppercase;">Core Purpose</p>
+      </div>
+      <div class="about-stat-grid">
+        <div class="stat-block">
+          <div class="num">200+</div>
+          <div class="lbl">Years Combined Psychrometric Experience</div>
+        </div>
+        <div class="stat-block">
+          <div class="num">3</div>
+          <div class="lbl">Fully Stocked Parts Store Locations</div>
+        </div>
+        <div class="stat-block">
+          <div class="num">30+</div>
+          <div class="lbl">Premier Equipment Manufacturers</div>
+        </div>
+        <div class="stat-block">
+          <div class="num">100%</div>
+          <div class="lbl">Factory-Trained Service Technicians</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div style="max-width:1200px;margin:0 auto 60px;">
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="section-h2">Comprehensive<br>HVAC Solutions</h2>
+    <p class="section-lead">
+      From waterside to airside to refrigeration, we cover every component required for commercial and industrial mechanical systems — with locally stocked inventory and factory support behind every recommendation.
+    </p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 48 48">
+        <rect x="8" y="14" width="32" height="22" rx="3"/>
+        <path d="M16 14V10M32 14V10M8 22h32M20 30h8"/>
+        <circle cx="24" cy="26" r="3"/>
+      </svg>
+      <h3>Equipment Sales</h3>
+      <p>Commercial chillers, rooftop units, air handlers, boilers, VRF systems and more from AAON, LG, York, Raypak and 25+ other top-tier manufacturers.</p>
+      <span class="service-tag">Waterside · Airside · Refrigeration</span>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 48 48">
+        <path d="M24 8v6M24 34v6M8 24h6M34 24h6"/>
+        <circle cx="24" cy="24" r="10"/>
+        <path d="M24 18v6l4 4"/>
+      </svg>
+      <h3>Service &amp; Maintenance</h3>
+      <p>Factory-trained technicians providing preventive maintenance, start-up commissioning, and energy-efficient solutions to protect long-term equipment performance.</p>
+      <span class="service-tag">Preventive · Commissioning · Energy Audits</span>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 48 48">
+        <path d="M10 38L38 10M14 10h24v24"/>
+        <circle cx="14" cy="38" r="4"/>
+        <path d="M20 20h-6v6"/>
+      </svg>
+      <h3>Parts &amp; Wholesale</h3>
+      <p>Two fully stocked parts stores in Memphis and Madison, MS. Air distribution, fans, boilers, filters, pumps, and VFDs — available with same-day pickup.</p>
+      <span class="service-tag">In-Stock · Same-Day · Expert Support</span>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 48 48">
+        <path d="M12 36V20l12-8 12 8v16"/>
+        <path d="M20 36v-8h8v8"/>
+        <path d="M8 36h32"/>
+      </svg>
+      <h3>System Integration</h3>
+      <p>Holistic coordination across all HVAC disciplines — we serve as the single point of accountability across equipment selection, installation, and startup for complex commercial projects.</p>
+      <span class="service-tag">Commercial · Institutional · Industrial</span>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 48 48">
+        <rect x="10" y="10" width="28" height="28" rx="2"/>
+        <path d="M18 24h12M24 18v12"/>
+        <circle cx="24" cy="24" r="4"/>
+      </svg>
+      <h3>Engineering Support</h3>
+      <p>17 degreed engineers with over 200 years of combined psychrometric experience supporting design teams from early budget phase through construction documentation.</p>
+      <span class="service-tag">Design-Assist · Budgeting · Selection Tools</span>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 48 48">
+        <path d="M10 30l8-12 8 8 6-8 6 10"/>
+        <path d="M8 38h32V10"/>
+      </svg>
+      <h3>AAON Selection Tools</h3>
+      <p>Specialized selection services for AAON equipment — one of the most energy-efficient rooftop and air handler lines available for commercial buildings in the Mid-South climate.</p>
+      <span class="service-tag">Energy-Efficient · Custom-Configured</span>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<div class="brands-section" id="brands">
+  <p class="brands-eyebrow">Representing 30+ Premier Manufacturers Including</p>
+  <div class="brands-row">
+    <div class="brand-pill">AAON</div>
+    <div class="brand-pill">LG</div>
+    <div class="brand-pill">York</div>
+    <div class="brand-pill">Raypak</div>
+    <div class="brand-pill">Cambridge</div>
+    <div class="brand-pill">Bell &amp; Gossett</div>
+    <div class="brand-pill">Taco Comfort</div>
+    <div class="brand-pill">Griswold</div>
+    <div class="brand-pill">Daikin</div>
+    <div class="brand-pill">Mitsubishi</div>
+    <div class="brand-pill">Grundfos</div>
+    <div class="brand-pill">Price Industries</div>
+    <div class="brand-pill">Tuttle &amp; Bailey</div>
+    <div class="brand-pill">+ Many More</div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div style="max-width:1200px;margin:0 auto 56px;">
+    <div class="section-eyebrow">What Clients Say</div>
+    <h2 class="section-h2">Trusted By<br>Engineers &amp; Builders</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        Etairos has been our go-to rep for commercial rooftop units for the past three years. Their engineers know the product line better than anyone and they turn around selections faster than any firm we have worked with.
+      </p>
+      <div class="reviewer-name">Marcus T.</div>
+      <div class="reviewer-role">MEP Engineer, Memphis, TN</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        From design assist through startup, the Etairos team was a true partner on our Hilton renovation project. Having factory-trained techs in both Tennessee and Mississippi made coordination seamless.
+      </p>
+      <div class="reviewer-name">Sandra R.</div>
+      <div class="reviewer-role">Project Manager, General Contractor</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        The parts availability at their Memphis warehouse is unmatched. When we had an emergency chiller failure in the middle of summer, they had the components on-site same day.
+      </p>
+      <div class="reviewer-name">James K.</div>
+      <div class="reviewer-role">Facilities Director, Commercial Property</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div style="text-align:center;margin-bottom:60px;">
+    <div class="section-eyebrow" style="justify-content:center;">Get In Touch</div>
+    <h2 class="section-h2">Request a Quote<br>or Consultation</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Memphis Equipment</h3>
+      <p>3095 Stonebrook Circle<br>Memphis, TN 38116<br><br><strong style="color:var(--white);">901.345.6100</strong></p>
+
+      <h3>Mississippi Office</h3>
+      <p>115 Lone Wolf Dr.<br>Madison, MS 39110<br><br><strong style="color:var(--white);">601.391.3535</strong></p>
+
+      <h3>Parts &amp; Wholesale</h3>
+      <p>1847 Vanderhorn Dr<br>Memphis, TN 38134<br><br><strong style="color:var(--white);">901.373.5100</strong></p>
+
+      <div style="margin-top:36px;padding-top:36px;border-top:1px solid rgba(143,164,192,0.15);">
+        <p style="font-size:14px;color:var(--muted);line-height:1.7;">
+          We serve commercial, institutional and industrial clients across Tennessee, Mississippi and the wider Mid-South region.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Your firm or organization">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(901) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@yourfirm.com">
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Equipment Sales & Selection</option>
+            <option>Service & Maintenance</option>
+            <option>Parts & Wholesale</option>
+            <option>Engineering / Design-Assist</option>
+            <option>AAON Selection</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Project Details</label>
+          <textarea placeholder="Briefly describe your project or equipment needs..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Best Time to Reach You</label>
+          <select>
+            <option value="">Select a time...</option>
+            <option>Morning (8am – 12pm)</option>
+            <option>Afternoon (12pm – 4pm)</option>
+            <option>End of Day (4pm – 6pm)</option>
+          </select>
+        </div>
+        <button class="form-submit" type="button">Submit Request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus-section">
+  <div style="max-width:1200px;margin:0 auto 60px;">
+    <div class="section-eyebrow">Why Etairos</div>
+    <h2 class="section-h2">Your Partner<br>From Bid to<br>Maintenance</h2>
+  </div>
+  <div class="whyus-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div class="why-content">
+        <h4>150+ Years of Combined Legacy</h4>
+        <p>Formed by merging the two oldest rep firms in Memphis with the longest-standing firm in the Jackson, MS market. That institutional knowledge is in every recommendation we make.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div class="why-content">
+        <h4>17 Degreed Engineers On Staff</h4>
+        <p>With over 200 years of combined psychrometric experience, our team supports design professionals at every phase — from early-stage budgeting to final startup.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div class="why-content">
+        <h4>30+ Top-Tier Manufacturer Lines</h4>
+        <p>We represent the industry's most respected brands across waterside, airside, and refrigeration — arming you with the right solution for any application.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div class="why-content">
+        <h4>Local Stock. Fast Support.</h4>
+        <p>Two fully stocked parts stores mean you are never waiting on freight from a distant warehouse. Emergency needs are handled the same day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<div class="locations-section">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-eyebrow" style="justify-content:center;">Locations</div>
+    <h2 class="section-h2" style="margin-bottom:8px;">Three Locations.<br>One Team.</h2>
+  </div>
+  <div class="locations-grid">
+    <div class="location-card">
+      <h4>Memphis Equipment</h4>
+      <p>3095 Stonebrook Circle<br>Memphis, TN 38116</p>
+      <a href="tel:9013456100" class="phone">901.345.6100</a>
+    </div>
+    <div class="location-card">
+      <h4>Mississippi Office</h4>
+      <p>115 Lone Wolf Dr.<br>Madison, MS 39110</p>
+      <a href="tel:6013913535" class="phone">601.391.3535</a>
+    </div>
+    <div class="location-card">
+      <h4>Parts &amp; Wholesale</h4>
+      <p>1847 Vanderhorn Dr<br>Memphis, TN 38134</p>
+      <a href="tel:9013735100" class="phone">901.373.5100</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Etairos<span>®</span> HVAC</div>
+      <p>The Mid-South's largest commercial HVAC manufacturers' representative. Providing sales, service, and integration for commercial, institutional, and industrial mechanical systems since 2020.</p>
+      <div class="social-links" style="margin-top:24px;">
+        <a href="https://www.facebook.com/EtairosHVAC" target="_blank">Facebook</a>
+        <a href="https://www.linkedin.com/company/etairoshvac/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul>
+        <li>Equipment Sales</li>
+        <li>Service &amp; Maintenance</li>
+        <li>Parts &amp; Wholesale</li>
+        <li>System Integration</li>
+        <li>Engineering Support</li>
+        <li>AAON Selection</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li>About Etairos</li>
+        <li>Featured Projects</li>
+        <li>Hilton Properties</li>
+        <li>Contact Us</li>
+        <li>Privacy Policy</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Etairos HVAC®. All Rights Reserved. Memphis, TN &amp; Madison, MS.</span>
+    <span>ASHRAE Member Firm</span>
+  </div>
+</footer>
+
+</body>
+</html>
